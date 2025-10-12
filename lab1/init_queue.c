@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/msg.h>
+#include <sys/stat.h>
+#include "message_queue.h"
+
+int init_queue()
+{
+    int msqid;
+    msqid = msgget(IPC_PRIVATE, IPC_CREAT | S_IRUSR | S_IWUSR);
+    if (msqid == -1) {
+        fprintf(stderr, "Error creating message queue.");
+        exit(EXIT_FAILURE);
+    }
+
+    return msqid;
+}
